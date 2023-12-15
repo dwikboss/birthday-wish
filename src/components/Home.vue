@@ -27,6 +27,9 @@ export default {
 			candleColors: ['#F8ED3E', '#E575AE', '#70CFEE', '#BFDEA2', '#F74141', '#FF66FB', '#9C70FC'],
 		};
 	},
+	created() {
+		this.handleMicrophoneInput();
+	},
 	methods: {
 		dropCandle(event) {
 			const mouseX = event.clientX;
@@ -49,6 +52,40 @@ export default {
 		getRandomDeepness() {
 			return Math.random() * (370 - 360) + 360;
 		},
+
+
+		handleMicrophoneInput() {
+			navigator.mediaDevices.getUserMedia({ audio: true })
+			.then((stream) => {
+				const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+				const source = audioContext.createMediaStreamSource(stream);
+				const analyser = audioContext.createAnalyser();
+				analyser.fftSize = 256;
+				source.connect(analyser);
+
+				const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+				function updateVolume() {
+				analyser.getByteFrequencyData(dataArray);
+				const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+
+				const volumeThreshold = 100;
+
+				if (averageVolume > volumeThreshold) {
+					const flames = document.querySelectorAll('.flame');
+						flames.forEach((flame) => {
+						flame.remove();
+					});
+				}
+					requestAnimationFrame(updateVolume);
+				}
+
+				updateVolume();
+			})
+			.catch((error) => {
+				console.error('Error accessing microphone:', error);
+			});
+		},
 		
 	},
 }
@@ -64,6 +101,7 @@ export default {
 	overflow: hidden;
 
 	h1 {
+		top: 0;
 		font-size: 30rem;
 		color: #0000004b;
 		height: 25%;
