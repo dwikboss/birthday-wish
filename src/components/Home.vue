@@ -18,7 +18,7 @@
 
 <script>
 export default {
-	name: 'Home',
+	name: 'HomeComponent',
 	props: {
 	},
 	data() {
@@ -102,7 +102,7 @@ export default {
 
 	h1 {
 		top: 0;
-		font-size: 30rem;
+		font-size: 26.5rem;
 		color: #0000004b;
 		height: 25%;
 		position: absolute;
