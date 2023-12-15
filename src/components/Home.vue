@@ -69,7 +69,7 @@ export default {
 				analyser.getByteFrequencyData(dataArray);
 				const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
-				const volumeThreshold = 60;
+				const volumeThreshold = 90;
 
 				if (averageVolume > volumeThreshold) {
 					const flames = document.querySelectorAll('.flame');
