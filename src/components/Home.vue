@@ -14,16 +14,23 @@
 			s4.1-9.8-1.5-17.7S19.1,0.3,19.1,0.3s3.2,11.8-3.8,16.7S13,31.8,17.8,33.4z"/>
 		</svg>
 	</div>
+	<LetterComponent v-if="candles.length === 22 && allCandlesBlownOut" />
 </template>
 
 <script>
+import LetterComponent from '@/components/LetterComponent.vue';
+
 export default {
 	name: 'HomeComponent',
+	components: {
+		LetterComponent,
+	},
 	props: {
 	},
 	data() {
 		return {
 			candles: [],
+			allCandlesBlownOut: false,
 			candleColors: ['#F8ED3E', '#E575AE', '#70CFEE', '#BFDEA2', '#F74141', '#FF66FB', '#9C70FC'],
 		};
 	},
@@ -56,36 +63,37 @@ export default {
 
 		handleMicrophoneInput() {
 			navigator.mediaDevices.getUserMedia({ audio: true })
-			.then((stream) => {
-				const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-				const source = audioContext.createMediaStreamSource(stream);
-				const analyser = audioContext.createAnalyser();
-				analyser.fftSize = 256;
-				source.connect(analyser);
+				.then((stream) => {
+					const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+					const source = audioContext.createMediaStreamSource(stream);
+					const analyser = audioContext.createAnalyser();
+					analyser.fftSize = 256;
+					source.connect(analyser);
 
-				const dataArray = new Uint8Array(analyser.frequencyBinCount);
+					const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-				function updateVolume() {
-				analyser.getByteFrequencyData(dataArray);
-				const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
+					const updateVolume = () => {
+						analyser.getByteFrequencyData(dataArray);
+						const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
-				const volumeThreshold = 100;
+						const volumeThreshold = 100;
 
-				if (averageVolume > volumeThreshold) {
-					const flames = document.querySelectorAll('.flame');
+						if (averageVolume > volumeThreshold) {
+						const flames = document.querySelectorAll('.flame');
 						flames.forEach((flame) => {
-						flame.remove();
-					});
-				}
-					requestAnimationFrame(updateVolume);
-				}
+							flame.remove();
+							this.allCandlesBlownOut = true;
+						});
+						}
+						requestAnimationFrame(updateVolume);
+					};
 
-				updateVolume();
-			})
-			.catch((error) => {
-				console.error('Error accessing microphone:', error);
-			});
-		},
+					updateVolume();
+				})
+				.catch((error) => {
+					console.error('Error accessing microphone:', error);
+				});
+			},
 		
 	},
 }
