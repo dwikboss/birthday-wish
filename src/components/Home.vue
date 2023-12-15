@@ -18,7 +18,7 @@
 
 <script>
 export default {
-	name: 'HelloWorld',
+	name: 'Home',
 	props: {
 	},
 	data() {
@@ -69,7 +69,7 @@ export default {
 				analyser.getByteFrequencyData(dataArray);
 				const averageVolume = dataArray.reduce((sum, value) => sum + value, 0) / dataArray.length;
 
-				const volumeThreshold = 100;
+				const volumeThreshold = 60;
 
 				if (averageVolume > volumeThreshold) {
 					const flames = document.querySelectorAll('.flame');
