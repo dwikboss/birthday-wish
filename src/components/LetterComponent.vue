@@ -31,14 +31,14 @@ export default {
         width: 85vw;
         border: 3px solid black;
         background-color: white;
-		top: -60vh;
+		top: -80vh;
 		left: 50%;
 		-webkit-transform: translateX(-50%);
 		transform: translateX(-50%) rotate(2deg);
 		z-index: 999;
 		color: black;
 		text-align: left;
-		animation: slideDown 500ms ease-in-out 1.5s forwards;
+		animation: slideDown 800 ease-in-out 1.5s forwards;
 
 		.text {
 			font-size: 1.4rem;
@@ -47,7 +47,7 @@ export default {
 	
 	@keyframes slideDown {
 		0% {
-			top: -60vh;
+			top: -80vh;
 		}
 		100% {
 			top: 5vh;
