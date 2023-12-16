@@ -38,7 +38,7 @@ export default {
 		z-index: 999;
 		color: black;
 		text-align: left;
-		animation: slideDown 800 ease-in-out 1.5s forwards;
+		animation: slideDown 800ms ease-in-out 1.5s forwards;
 
 		.text {
 			font-size: 1.4rem;
