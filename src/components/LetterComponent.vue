@@ -1,7 +1,7 @@
 <template>
 	<div class="letter">
 		<div class="text">
-			<span style="font-size: 1.8rem;">Gefeliciteerd met je 22ste verjaardag Anouk!!! 😁😁</span><br/><br/>
+			<span style="font-size: 1.8rem;">Gefeliciteerd met je (bijna) 22ste verjaardag Anouk!!! 😁😁</span><br/><br/>
 			Sinds de dag dat we vrienden zijn geworden hebben we al zo veel leuke dingen meegemaakt en gedaan en zo veel coole memories gemaakt!!
 			Van K-Pop tot Glee van CINEMA 😎 tot concerten hebben we 1001 dingen om te doen en over te praten! Het is zo zo zo zo zo leuk dat we al die dingen samen kunnen doen en ik hoop dat daar 1000000 dingen bij gaan komen zzzz.
 			Van alle nieuwe dingen die in mijn leven zijn gekomen ben jij zeker S+++ tier!! Dus ik zou zeggen, geniet van deze top dag!!! 🛂😁😎🛂
